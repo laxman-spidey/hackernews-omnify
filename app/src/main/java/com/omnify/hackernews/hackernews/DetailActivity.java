@@ -22,9 +22,13 @@ import android.widget.TextView;
 
 import com.omnify.hackernews.hackernews.models.Article;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailActivity extends BaseActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private Article article;
     private ViewPager mViewPager;
     public TextView mArticleTitle;
     public TextView mArticleSite;
@@ -44,7 +48,8 @@ public class DetailActivity extends BaseActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
+        mSectionsPagerAdapter.addFrag(PlaceholderFragment.newInstance(1), "Comments");
+        mSectionsPagerAdapter.addFrag(WebArticleFragment.newInstance(article.url), "Article");
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -55,10 +60,11 @@ public class DetailActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
+
     }
 
     private void setArticleDataFromIntent() {
-        Article article = Article.newInstance(getIntent().getStringExtra("article"));
+        article = Article.newInstance(getIntent().getStringExtra("article"));
         if (article != null) {
             mArticleTitle = findViewById(R.id.articleTitle);
             mArticleSite = findViewById(R.id.articleSite);
@@ -127,17 +133,31 @@ public class DetailActivity extends BaseActivity {
             super(fm);
         }
 
+
+
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+
+
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
         }
     }
 }
