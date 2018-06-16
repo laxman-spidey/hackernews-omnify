@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
+    <color name="articleRepCountBackground">#FFC7A4</color>
+    <color name="articleRepTextColor">#8E6C5F</color>
+    <color name="articleBackground">#EFEFEF</color>
+
 </resources>
