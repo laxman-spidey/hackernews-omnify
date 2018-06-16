@@ -4,15 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/headerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:text="Hacker News"
+            android:textStyle="bold"
+            android:textSize="25sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headerView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Mobile"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/google_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/ic_google_logo"
+            android:elevation="6sp"
+            android:padding="15dp"
+            android:text="Login with Google"
+            android:layout_above="@+id/phone_login_button"
+            android:visibility="visible" />
+        <Button
+            android:id="@+id/phone_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/ic_smartphone_24dp"
+            android:elevation="6sp"
+            android:padding="15dp"
+            android:text="Login with Phone"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
