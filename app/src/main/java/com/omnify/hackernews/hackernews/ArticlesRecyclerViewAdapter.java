@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.omnify.hackernews.hackernews.ArticlesFragment.OnListFragmentInteractionListener;
 import com.omnify.hackernews.hackernews.dummy.DummyContent.DummyItem;
+import com.omnify.hackernews.hackernews.models.Article;
 
 import java.util.List;
 
@@ -18,10 +19,10 @@ import java.util.List;
  */
 public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Article> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public ArticlesRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public ArticlesRecyclerViewAdapter(List<Article> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,8 +37,12 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mVoteCount.setText(mValues.get(position).id);
-        holder.mCommentCount.setText(mValues.get(position).content);
+        Article article = mValues.get(position);
+        holder.mVoteCount.setText(article.score);
+        holder.mArticleTitle.setText(article.title);
+        holder.mArticleSite.setText(article.url);
+        holder.mArticleSubmittedByUser.setText(article.by);
+        holder.mCommentCount.setText(mValues.get(position).kids.size());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +69,7 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
         public final TextView mArticleSubmissionDate;
         public final TextView mArticleSubmittedByUser;
         public final TextView mCommentCount;
-        public DummyItem mItem;
+        public Article mItem;
 
         public ViewHolder(View view) {
             super(view);

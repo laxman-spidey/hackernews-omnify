@@ -4,23 +4,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.omnify.hackernews.hackernews.dummy.DummyContent;
-import com.omnify.hackernews.hackernews.dummy.DummyContent.DummyItem;
-import com.omnify.hackernews.hackernews.firebaseModels.StoriesModel;
+import com.omnify.hackernews.hackernews.firebaseModels.ArticlesModel;
+import com.omnify.hackernews.hackernews.models.Article;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,7 +68,8 @@ public class ArticlesFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new ArticlesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            List<Article> articles = new ArrayList<>();
+            recyclerView.setAdapter(new ArticlesRecyclerViewAdapter(articles, mListener));
 
         }
         return view;
@@ -110,13 +105,12 @@ public class ArticlesFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Article item);
     }
 
     public void connectFirebase()
     {
-
-        StoriesModel.subscribeToTopStories();
+        ArticlesModel.subscribeToTopStories();
 
     }
 

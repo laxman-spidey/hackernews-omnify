@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.omnify.hackernews.hackernews.dummy.DummyContent;
+import com.omnify.hackernews.hackernews.models.Article;
 
 public class MainActivity extends BaseActivity implements ArticlesFragment.OnListFragmentInteractionListener {
 
@@ -25,7 +26,7 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Article item) {
 
     }
 }
