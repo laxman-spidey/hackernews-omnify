@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.ValueEventListener;
 import com.omnify.hackernews.hackernews.dummy.DummyContent;
 import com.omnify.hackernews.hackernews.firebaseModels.ArticlesModel;
+import com.omnify.hackernews.hackernews.firebaseModels.ResponseListener;
 import com.omnify.hackernews.hackernews.models.Article;
 
 import java.util.ArrayList;
@@ -25,36 +28,23 @@ import java.util.List;
  */
 public class ArticlesFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    RecyclerView recyclerView;
+    private List<Article> articles;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ArticlesFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ArticlesFragment newInstance(int columnCount) {
+    public static ArticlesFragment newInstance() {
         ArticlesFragment fragment = new ArticlesFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        articles = new ArrayList<>();
         connectFirebase();
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -65,10 +55,11 @@ public class ArticlesFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+
+            recyclerView = (RecyclerView) view;
             recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            List<Article> articles = new ArrayList<>();
+
             recyclerView.setAdapter(new ArticlesRecyclerViewAdapter(articles, mListener));
 
         }
@@ -110,7 +101,14 @@ public class ArticlesFragment extends Fragment {
 
     public void connectFirebase()
     {
-        ArticlesModel.subscribeToTopStories();
+
+        ArticlesModel.subscribeToTopStories(response -> {
+            if(response.isOkay) {
+                articles.add((Article)response.data);
+                Log.i("TAG", articles.toString());
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+        });
 
     }
 

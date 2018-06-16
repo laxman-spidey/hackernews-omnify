@@ -20,7 +20,7 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        articlesFragment = ArticlesFragment.newInstance(10);
+        articlesFragment = ArticlesFragment.newInstance();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, articlesFragment).commit();
 
     }

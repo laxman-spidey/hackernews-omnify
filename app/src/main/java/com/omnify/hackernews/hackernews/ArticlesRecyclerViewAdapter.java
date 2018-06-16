@@ -1,6 +1,7 @@
 package com.omnify.hackernews.hackernews;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
     private final List<Article> mValues;
     private final OnListFragmentInteractionListener mListener;
 
+
     public ArticlesRecyclerViewAdapter(List<Article> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
@@ -36,13 +38,20 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
         holder.mItem = mValues.get(position);
         Article article = mValues.get(position);
-        holder.mVoteCount.setText(article.score);
+        Log.i("TAG", "bind view holder: "+ article.toString());
+        holder.mVoteCount.setText(""+article.score);
         holder.mArticleTitle.setText(article.title);
         holder.mArticleSite.setText(article.url);
         holder.mArticleSubmittedByUser.setText(article.by);
-        holder.mCommentCount.setText(mValues.get(position).kids.size());
+        if (article.kids != null) {
+            holder.mCommentCount.setText("" + article.kids.size());
+        } else {
+            holder.mCommentCount.setText("0");
+        }
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +65,10 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
         });
     }
 
+
     @Override
     public int getItemCount() {
+        Log.i("TAG", "articles size: "+mValues.size());
         return mValues.size();
     }
 

@@ -15,19 +15,22 @@ public class ArticlesModel extends FirebaseModel {
     public static final String TOP_STORIES = "topstories";
     public static final String STORY_ITEM = "item/";
 
-    public static void subscribeToTopStories()
+    public static int MAX_TOP_STORIES = 50;
+
+    public static void subscribeToTopStories(ResponseListener listener)
     {
         getDatabase().child(TOP_STORIES).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Article> topStories = new ArrayList<>();
+                int count = 1;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if(count++ > MAX_TOP_STORIES) { break; }
                     String storyId = snapshot.getValue().toString();
                     getDatabase().child(STORY_ITEM + storyId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Article article = dataSnapshot.getValue(Article.class);
-                            topStories.add(article);
+                            listener.onResponseRecieved(new ResponseListener.Response(true, article));
                             Log.i("TAG", dataSnapshot.toString());
                         }
 
@@ -45,4 +48,6 @@ public class ArticlesModel extends FirebaseModel {
             }
         });
     }
+
+
 }

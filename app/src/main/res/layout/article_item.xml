@@ -36,6 +36,8 @@
                 android:textStyle="bold"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:maxLines="2"
+                android:ellipsize="marquee"
                 />
             <TextView
                 android:id="@+id/articleSite"
@@ -46,6 +48,8 @@
                 android:layout_below="@id/articleTitle"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
                 android:textSize="14sp"/>
             <TextView
                 android:id="@+id/submissionDate"

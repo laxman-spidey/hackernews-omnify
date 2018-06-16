@@ -4,7 +4,7 @@ import com.google.firebase.database.Exclude;
 
 import java.util.List;
 
-public class Article {
+public class Article extends Model {
     public String by;
     public int id;
     public int score;
@@ -14,5 +14,6 @@ public class Article {
     public String text;
     public long time;
     public List<Integer> kids;
+
 
 }
