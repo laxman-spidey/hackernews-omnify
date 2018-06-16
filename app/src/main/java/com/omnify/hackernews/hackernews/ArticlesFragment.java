@@ -7,12 +7,19 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.omnify.hackernews.hackernews.dummy.DummyContent;
 import com.omnify.hackernews.hackernews.dummy.DummyContent.DummyItem;
+import com.omnify.hackernews.hackernews.firebaseModels.StoriesModel;
 
 import java.util.List;
 
@@ -50,7 +57,7 @@ public class ArticlesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        connectFirebase();
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -105,4 +112,12 @@ public class ArticlesFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
     }
+
+    public void connectFirebase()
+    {
+
+        StoriesModel.subscribeToTopStories();
+
+    }
+
 }
