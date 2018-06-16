@@ -6,8 +6,7 @@
     android:name="com.omnify.hackernews.hackernews.ArticlesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
+    android:orientation="vertical"
     tools:context=".ArticlesFragment"
-    tools:listitem="@layout/fragment_article" />
+    tools:listitem="@layout/article_item" />

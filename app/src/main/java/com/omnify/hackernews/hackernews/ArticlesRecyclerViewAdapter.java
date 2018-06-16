@@ -29,15 +29,15 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_article, parent, false);
+                .inflate(R.layout.article_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mVoteCount.setText(mValues.get(position).id);
+        holder.mCommentCount.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,20 +58,23 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mVoteCount;
+        public final TextView mArticleTitle;
+        public final TextView mArticleSite;
+        public final TextView mArticleSubmissionDate;
+        public final TextView mArticleSubmittedByUser;
+        public final TextView mCommentCount;
         public DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            mVoteCount = view.findViewById(R.id.voteCount);
+            mArticleTitle = view.findViewById(R.id.articleTitle);
+            mArticleSite = view.findViewById(R.id.articleSite);
+            mArticleSubmissionDate = view.findViewById(R.id.submissionDate);
+            mArticleSubmittedByUser = view.findViewById(R.id.submittedByUser);
+            mCommentCount = view.findViewById(R.id.comment_count);
         }
     }
 }
