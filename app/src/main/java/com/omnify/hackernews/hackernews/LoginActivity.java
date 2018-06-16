@@ -57,6 +57,7 @@ public class LoginActivity extends BaseActivity {
                 hideProgress();
                 Log.i(TAG, "OnActivityResult: google sign in success ");
                 GoogleSignInAccount account = result.getSignInAccount();
+                showMainActivity();
             } else {
                 hideProgress();
                 Toast.makeText(getContext(), "Something went wrong while logging in. Please try again.", Toast.LENGTH_SHORT).show();
@@ -64,5 +65,14 @@ public class LoginActivity extends BaseActivity {
             }
         }
     }
+
+    private void showMainActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        hideProgress();
+        finish();
+        startActivity(intent);
+
+    }
+
 
 }
