@@ -18,4 +18,12 @@ public class BaseActivity extends AppCompatActivity {
     {
         return this;
     }
+    public void showProgress() {
+        ProgressDialog.show(getContext());
+    }
+
+    public void hideProgress() {
+        ProgressDialog.hide(getContext());
+    }
+
 }

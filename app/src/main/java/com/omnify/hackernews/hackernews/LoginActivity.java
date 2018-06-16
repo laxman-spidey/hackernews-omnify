@@ -28,18 +28,20 @@ public class LoginActivity extends BaseActivity {
         setupGoogleLogin();
     }
 
+
     private void setupGoogleLogin() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this , connectionResult -> Toast.makeText(LoginActivity.this, "Connection failed.", Toast.LENGTH_SHORT).show())
+                .enableAutoManage(this, connectionResult -> Toast.makeText(LoginActivity.this, "Connection failed.", Toast.LENGTH_SHORT).show())
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         Button signInButton = findViewById(R.id.google_login_button);
         signInButton.setOnClickListener(v -> googleSignIn());
     }
+
     private void googleSignIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
@@ -47,17 +49,20 @@ public class LoginActivity extends BaseActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        showProgress();
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             Log.i(TAG, "OnActivityResult: google signin" + result.getSignInAccount());
             if (result.isSuccess()) {
+                hideProgress();
                 Log.i(TAG, "OnActivityResult: google sign in success ");
                 GoogleSignInAccount account = result.getSignInAccount();
             } else {
+                hideProgress();
                 Toast.makeText(getContext(), "Something went wrong while logging in. Please try again.", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "OnActivityResult: google sign in failed ");
             }
         }
     }
+
 }
