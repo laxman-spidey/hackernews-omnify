@@ -1,6 +1,7 @@
 package com.omnify.hackernews.hackernews.models;
 
 import com.google.firebase.database.Exclude;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public class Article extends Model {
     public long time;
     public List<Integer> kids;
 
-
+    public static Article newInstance(String json) {
+        return new Gson().fromJson(json, Article.class);
+    }
 }

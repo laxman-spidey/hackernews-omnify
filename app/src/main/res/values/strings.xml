@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Hacker News</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="tab_text_1">Comments</string>
+    <string name="tab_text_2">Article</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

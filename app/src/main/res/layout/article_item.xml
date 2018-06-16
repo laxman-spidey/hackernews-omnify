@@ -58,11 +58,25 @@
                 android:layout_below="@id/articleSite"
                 android:text="2 hours ago   "/>
             <TextView
+                android:id="@+id/middleDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_alignTop="@+id/submissionDate"
+                android:layout_toRightOf="@+id/submissionDate"
+                android:layout_toEndOf="@+id/submissionDate"
+
+                />
+            <TextView
                 android:id="@+id/submittedByUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/submissionDate"
-                android:layout_toEndOf="@+id/submissionDate"
+                android:layout_toRightOf="@+id/middleDot"
+                android:layout_toEndOf="@+id/middleDot"
                 android:layout_alignTop="@+id/submissionDate"
                 android:text="user1"
                 />

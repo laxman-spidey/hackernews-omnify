@@ -46,6 +46,7 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
         holder.mArticleTitle.setText(article.title);
         holder.mArticleSite.setText(article.url);
         holder.mArticleSubmittedByUser.setText(article.by);
+        holder.mArticleSubmissionDate.setText(DateUtil.getRelativeTime(article.time));
         if (article.kids != null) {
             holder.mCommentCount.setText("" + article.kids.size());
         } else {
@@ -53,14 +54,11 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesRe
         }
 
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+        holder.mView.setOnClickListener(v -> {
+            if (null != mListener) {
+                // Notify the active callbacks interface (the activity, if the
+                // fragment is attached to one) that an item has been selected.
+                mListener.onListFragmentInteraction(holder.mItem);
             }
         });
     }
