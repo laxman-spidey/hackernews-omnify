@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/articleBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/voteCount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.20"
+            android:background="@color/articleRepCountBackground"
+            android:gravity="center"
+            android:text="41"
+            android:textColor="@color/articleRepTextColor"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:paddingLeft="12dp"
+            android:layout_weight="0.60">
+            <TextView
+                android:id="@+id/articleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Article Title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/articleSite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="www.w3schools.com"
+                android:textStyle="italic"
+                android:layout_below="@id/articleTitle"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/submissionDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/articleSite"
+                android:text="2 hours ago   "/>
+            <TextView
+                android:id="@+id/submittedByUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/submissionDate"
+                android:layout_toEndOf="@+id/submissionDate"
+                android:layout_alignTop="@+id/submissionDate"
+                android:text="user1"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.20"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/comment_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_mode_comment_24dp"/>
+
+            <TextView
+                android:id="@+id/comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/comment_icon"
+                android:text="56"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/articleRepTextColor"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
