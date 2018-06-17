@@ -48,6 +48,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_logout"
+                    android:paddingRight="8dp"
                     android:background="@color/tw__transparent"
                     />
             </RelativeLayout>

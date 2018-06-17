@@ -53,8 +53,8 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
         if (FirebaseAuth.getInstance() != null) {
             FirebaseAuth.getInstance().signOut();
             ProgressDialog.hide(this);
-            showLoginScreen();
             finish();
+//            showLoginScreen();
         } else {
             ProgressDialog.hide(this);
             Toast.makeText(this, "Unable to logout. Please try again", Toast.LENGTH_SHORT).show();
