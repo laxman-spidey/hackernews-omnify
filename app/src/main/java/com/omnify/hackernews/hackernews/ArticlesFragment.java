@@ -1,6 +1,7 @@
 package com.omnify.hackernews.hackernews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -26,7 +27,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ArticlesFragment extends Fragment {
+public class ArticlesFragment extends BaseFragment {
 
     private OnListFragmentInteractionListener mListener;
     RecyclerView recyclerView;
@@ -50,9 +51,9 @@ public class ArticlesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_article_list, container, false);
-
-        // Set the adapter
+        setSuccessView(view);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
 
@@ -63,7 +64,7 @@ public class ArticlesFragment extends Fragment {
             recyclerView.setAdapter(new ArticlesRecyclerViewAdapter(articles, mListener));
 
         }
-        return view;
+        return rootView;
     }
 
 
@@ -104,12 +105,36 @@ public class ArticlesFragment extends Fragment {
 
         ArticlesModel.subscribeToTopStories(response -> {
             if(response.isOkay) {
-                articles.add((Article)response.data);
-                Log.i("TAG", articles.toString());
-                recyclerView.getAdapter().notifyDataSetChanged();
+                List<Integer> articleList = (List<Integer>)response.data;
+                if(articleList.size() > 0 )
+                {
+                    onSuccess();
+                    getArticles(articleList);
+                }
+                else {
+                    onNoDataFound();
+                }
+            }
+            else {
+                onError();
             }
         });
+    }
 
+    public void getArticles(List<Integer> articleList) {
+        int MAX_TOP_STORIES = 50;
+        int articlesFetched = 1;
+        for (Integer articleId : articleList) {
+            if (articlesFetched++ > MAX_TOP_STORIES) {
+                break;
+            }
+            ArticlesModel.getArticle(articleId, response -> {
+                if (response.isOkay) {
+                    articles.add((Article)response.data);
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
+            });
+        }
     }
 
 }
