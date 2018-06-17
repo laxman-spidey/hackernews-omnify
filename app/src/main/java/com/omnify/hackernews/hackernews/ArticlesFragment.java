@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.omnify.hackernews.hackernews.RESTModels.ArticlesModel;
 import com.omnify.hackernews.hackernews.models.Article;
+import com.omnify.hackernews.hackernews.models.ArticleIdList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class ArticlesFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         articles = new ArrayList<>();
-        getArticleIdsList();
+
     }
 
     @Override
@@ -50,14 +51,11 @@ public class ArticlesFragment extends BaseFragment {
         setSuccessView(view);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-
             recyclerView = (RecyclerView) view;
-
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
             recyclerView.setAdapter(new ArticlesRecyclerViewAdapter(articles, mListener));
-
         }
+        getArticleIdsList();
         return rootView;
     }
 
@@ -83,23 +81,38 @@ public class ArticlesFragment extends BaseFragment {
         void onListFragmentInteraction(Article item);
     }
 
-    public void getArticleIdsList()
-    {
+    List<Integer> previousFetchedList;
+    boolean addAtTop = false;
+
+    public void getArticleIdsList() {
 
         ArticlesModel.getInstance(getContext()).getTopStories(response -> {
-            if(response.isOkay) {
-                List<Integer> articleList = (List<Integer>)response.data;
-                if(articleList.size() > 0 )
-                {
-                    onSuccess();
-                    getArticles(articleList);
-                }
-                else {
+            if (response.isOkay) {
+                ArticleIdList articleIdList = (ArticleIdList) response.data;
+                if (articleIdList.articleIds.size() > 0) {
+
+                    // If the list fetched is the first time either offline or online
+                    if (articles.size() == 0) {
+                        onSuccess();
+                        previousFetchedList = articleIdList.articleIds;
+                        getArticles(articleIdList.articleIds);
+                    }
+                    // Once the List is fetched second time, then only new articles are added at the top
+                    else {
+                        articleIdList.articleIds.removeAll(previousFetchedList);
+                        addAtTop = true;
+                        getArticles(articleIdList.articleIds);
+                    }
+                    setLastUpdated(articleIdList.lastUpdated);
+                } else {
                     onNoDataFound();
                 }
-            }
-            else {
-                onError();
+            } else {
+                if (articles.size() > 0) {
+                    onSuccess();
+                } else {
+                    onError();
+                }
             }
         });
     }
@@ -113,11 +126,19 @@ public class ArticlesFragment extends BaseFragment {
             }
             ArticlesModel.getInstance(getContext()).getArticle(articleId, response -> {
                 if (response.isOkay) {
-                    articles.add((Article)response.data);
+                    if (addAtTop)
+                        articles.add(0, (Article) response.data);
+                    else
+                        articles.add((Article) response.data);
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
             });
         }
     }
 
+    public void setLastUpdated(long millis) {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setLastUpdated(millis);
+        }
+    }
 }

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +21,7 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
 
     Fragment articlesFragment;
     ImageButton logoutButton;
-    FirebaseAuth mAuth;
+    TextView lastUpdated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
         logoutButton.setOnClickListener(v -> {
             logout();
         });
+        lastUpdated = findViewById(R.id.lastUpdated);
         setSupportActionBar(toolbar);
         articlesFragment = ArticlesFragment.newInstance();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, articlesFragment).commit();
@@ -58,5 +60,9 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
 
     }
 
+    public void setLastUpdated(long millis)
+    {
+        lastUpdated.setText("Updated "+DateUtil.getRelativeTime(millis));
+    }
 
 }
