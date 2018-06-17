@@ -11,7 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
-public class WebArticleFragment extends Fragment {
+public class WebArticleFragment extends BaseFragment {
 
     private static final String ARTICLE_URL = "ARTICLE_URL";
 
@@ -44,8 +44,9 @@ public class WebArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_web_article, container, false);
+        setSuccessView(view);
         webview  = view.findViewById(R.id.article_webview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient()
@@ -53,7 +54,7 @@ public class WebArticleFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                ProgressDialog.hide(getContext());
+                onSuccess();
             }
 
 //
@@ -64,6 +65,6 @@ public class WebArticleFragment extends Fragment {
 //            }
         });
         webview.loadUrl(articleUrl);
-        return view;
+        return rootView;
     }
 }
