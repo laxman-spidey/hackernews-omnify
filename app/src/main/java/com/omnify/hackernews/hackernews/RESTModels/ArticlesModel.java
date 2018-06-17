@@ -6,7 +6,6 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.omnify.hackernews.hackernews.firebaseModels.ResponseListener;
@@ -46,12 +45,24 @@ public class ArticlesModel extends VolleyModel {
     }
 
     public void getArticle(int articleId, ResponseListener listener) {
+
+        //check Realm before sending request
+        Article articleOffline = com.omnify.hackernews.hackernews.realmModels.ArticlesModel.getArticle(articleId);
+        if(articleOffline != null) {
+            Log.i(TAG, "fetching from offline" );
+            Log.i(TAG, articleOffline.toString());
+            listener.onResponseRecieved(new ResponseListener.Response(true, articleOffline));
+            return;
+        }
+
+
         String url = SERVER_PATH + STORY_ITEM + articleId + JSON;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
                     Log.i(TAG, response.toString());
                     Article article = new Gson().fromJson(response.toString(), Article.class);
                     listener.onResponseRecieved(new ResponseListener.Response(true, article));
+                    com.omnify.hackernews.hackernews.realmModels.ArticlesModel.insertArticle(article);
                     Log.i("TAG", response.toString());
                 }, error -> {
                     Log.i(TAG, error.getMessage());

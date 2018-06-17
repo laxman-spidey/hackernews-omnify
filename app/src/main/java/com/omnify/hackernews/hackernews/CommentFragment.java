@@ -40,7 +40,7 @@ public class CommentFragment extends BaseFragment {
         if (getArguments() != null) {
             articleId = getArguments().getInt(ARG_ARTICLE_ID);
         }
-        getCommentIdList(articleId);
+
     }
 
     @Override
@@ -59,6 +59,7 @@ public class CommentFragment extends BaseFragment {
 
             recyclerView.setAdapter(new CommentRecyclerViewAdapter(comments));
         }
+        getCommentIdList(articleId);
         return rootView;
     }
 

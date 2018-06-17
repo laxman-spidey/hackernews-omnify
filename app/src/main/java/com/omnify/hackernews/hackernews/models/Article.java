@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.realm.RealmObject;
+
 public class Article extends Model {
     public String by;
     public int id;
@@ -18,5 +20,10 @@ public class Article extends Model {
 
     public static Article newInstance(String json) {
         return new Gson().fromJson(json, Article.class);
+    }
+    @Override
+    public String toString()
+    {
+        return new Gson().toJson(this);
     }
 }
