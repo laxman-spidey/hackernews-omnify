@@ -6,8 +6,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.omnify.hackernews.hackernews.models.Comment;
 
 public class CommentsModel  extends FirebaseModel {
-    public static final String COMMENT_ITEM = "item/";
-
     public static void getComment(int commentId, ResponseListener listener) {
         getDatabase().child(COMMENT_ITEM + commentId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -22,4 +20,6 @@ public class CommentsModel  extends FirebaseModel {
             }
         });
     }
+
+    public static final String COMMENT_ITEM = "item/";
 }

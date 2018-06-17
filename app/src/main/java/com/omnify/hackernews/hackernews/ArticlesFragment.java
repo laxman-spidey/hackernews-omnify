@@ -1,21 +1,15 @@
 package com.omnify.hackernews.hackernews;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.ValueEventListener;
-import com.omnify.hackernews.hackernews.dummy.DummyContent;
-import com.omnify.hackernews.hackernews.firebaseModels.ArticlesModel;
-import com.omnify.hackernews.hackernews.firebaseModels.ResponseListener;
+import com.omnify.hackernews.hackernews.RESTModels.ArticlesModel;
 import com.omnify.hackernews.hackernews.models.Article;
 
 import java.util.ArrayList;
@@ -45,7 +39,7 @@ public class ArticlesFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         articles = new ArrayList<>();
-        connectFirebase();
+        getArticleIdsList();
     }
 
     @Override
@@ -89,10 +83,10 @@ public class ArticlesFragment extends BaseFragment {
         void onListFragmentInteraction(Article item);
     }
 
-    public void connectFirebase()
+    public void getArticleIdsList()
     {
 
-        ArticlesModel.subscribeToTopStories(response -> {
+        ArticlesModel.getInstance(getContext()).getTopStories(response -> {
             if(response.isOkay) {
                 List<Integer> articleList = (List<Integer>)response.data;
                 if(articleList.size() > 0 )
@@ -117,7 +111,7 @@ public class ArticlesFragment extends BaseFragment {
             if (articlesFetched++ > MAX_TOP_STORIES) {
                 break;
             }
-            ArticlesModel.getArticle(articleId, response -> {
+            ArticlesModel.getInstance(getContext()).getArticle(articleId, response -> {
                 if (response.isOkay) {
                     articles.add((Article)response.data);
                     recyclerView.getAdapter().notifyDataSetChanged();

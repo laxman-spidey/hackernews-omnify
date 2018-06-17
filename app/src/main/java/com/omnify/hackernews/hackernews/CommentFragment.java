@@ -2,19 +2,14 @@ package com.omnify.hackernews.hackernews;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.omnify.hackernews.hackernews.dummy.DummyContent;
-import com.omnify.hackernews.hackernews.dummy.DummyContent.DummyItem;
-import com.omnify.hackernews.hackernews.firebaseModels.ArticlesModel;
-import com.omnify.hackernews.hackernews.firebaseModels.CommentsModel;
+import com.omnify.hackernews.hackernews.RESTModels.ArticlesModel;
+import com.omnify.hackernews.hackernews.RESTModels.CommentsModel;
 import com.omnify.hackernews.hackernews.models.Article;
 import com.omnify.hackernews.hackernews.models.Comment;
 
@@ -69,7 +64,7 @@ public class CommentFragment extends BaseFragment {
 
     public void getCommentIdList(int articleId) {
 
-        ArticlesModel.getArticle(articleId, response -> {
+        ArticlesModel.getInstance(getContext()).getArticle(articleId, response -> {
             if (response.isOkay) {
                 Article article = (Article) response.data;
                 if (article.kids != null) {
@@ -90,7 +85,7 @@ public class CommentFragment extends BaseFragment {
 
     public void getComments(List<Integer> commentIds) {
         for (Integer commentId : commentIds) {
-            CommentsModel.getComment(commentId, response -> {
+            CommentsModel.getInstance(getContext()).getComment(commentId, response -> {
                 if (response.isOkay) {
                     comments.add((Comment) response.data);
                     recyclerView.getAdapter().notifyDataSetChanged();
