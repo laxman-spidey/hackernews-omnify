@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="com.omnify.hackernews.hackernews.ArticlesFragment"
+    android:name="com.omnify.hackernews.hackernews.CommentFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    android:orientation="vertical"
-    tools:context=".ArticlesFragment"
-    tools:listitem="@layout/article_item" />
+    tools:context=".CommentFragment"
+    tools:listitem="@layout/comment_list_item" />

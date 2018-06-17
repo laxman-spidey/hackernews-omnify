@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="12dp"
+    android:background="@color/articleBackground"
+    android:paddingTop="10dp"
+    android:layout_marginBottom="4dp"
+
+    >
+
+    <TextView
+        android:id="@+id/commentDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4 Sep, 2017 - 16:43"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/middleDot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_toRightOf="@id/commentDateTime"
+        android:layout_toEndOf="@id/commentDateTime"
+        android:layout_alignTop="@+id/commentDateTime"
+        />
+    <TextView
+        android:id="@+id/commentUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/middleDot"
+        android:layout_toEndOf="@id/middleDot"
+        android:layout_alignTop="@+id/middleDot"
+        android:text="username"/>
+    <TextView
+        android:id="@+id/commentText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commentDateTime"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="this comment"/>
+</RelativeLayout>

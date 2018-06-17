@@ -18,8 +18,6 @@ public class ArticlesModel extends FirebaseModel {
     public static final String TOP_STORIES = "topstories";
     public static final String STORY_ITEM = "item/";
 
-    public static int MAX_TOP_STORIES = 50;
-
 
     public static void subscribeToTopStories(ResponseListener listener)
     {
