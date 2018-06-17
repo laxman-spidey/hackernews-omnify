@@ -46,8 +46,8 @@
             android:id="@+id/google_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/phone_login_button"
-            android:layout_marginBottom="8dp"
+
+            android:layout_marginBottom="16dp"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:backgroundTint="@color/white"
@@ -55,9 +55,12 @@
             android:elevation="6sp"
             android:padding="15dp"
             android:text="Login with Google"
-            android:visibility="visible" />
+            android:layout_alignParentBottom="true"
+
+            />
 
         <Button
+
             android:id="@+id/phone_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,6 +73,6 @@
             android:elevation="6sp"
             android:padding="15dp"
             android:text="Login with Phone"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

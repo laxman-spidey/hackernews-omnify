@@ -13,6 +13,13 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         int SPLASH_TIMEOUT_SHORT = 3000;
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             new Handler().postDelayed(() -> {

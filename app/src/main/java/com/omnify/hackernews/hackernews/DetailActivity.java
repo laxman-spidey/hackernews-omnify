@@ -28,6 +28,7 @@ import java.util.List;
 public class DetailActivity extends BaseActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    Toolbar toolbar;
     private Article article;
     private ViewPager mViewPager;
     public TextView mArticleTitle;
@@ -41,7 +42,8 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setArticleDataFromIntent();
@@ -75,6 +77,8 @@ public class DetailActivity extends BaseActivity {
             mArticleSite.setText(article.url);
             mArticleSubmittedByUser.setText(article.by);
             mArticleSubmissionDate.setText(DateUtil.getRelativeTime(article.time));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+            toolbar.setTitle(article.title);
         }
     }
 

@@ -48,10 +48,12 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
     }
 
     public void logout() {
+        Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
         ProgressDialog.show(this);
         if (FirebaseAuth.getInstance() != null) {
             FirebaseAuth.getInstance().signOut();
             ProgressDialog.hide(this);
+            showLoginScreen();
             finish();
         } else {
             ProgressDialog.hide(this);
@@ -60,6 +62,10 @@ public class MainActivity extends BaseActivity implements ArticlesFragment.OnLis
 
     }
 
+    public void showLoginScreen() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
     public void setLastUpdated(long millis)
     {
         lastUpdated.setText("Updated "+DateUtil.getRelativeTime(millis));

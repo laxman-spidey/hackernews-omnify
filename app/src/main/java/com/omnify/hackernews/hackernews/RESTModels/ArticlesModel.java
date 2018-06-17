@@ -33,6 +33,7 @@ public class ArticlesModel extends VolleyModel {
 
     public void getTopStories(ResponseListener listener) {
 
+        //fetching offline data first
         ArticleIdList articleListOffline = com.omnify.hackernews.hackernews.realmModels.ArticlesModel.getArticleIdList();
         if(articleListOffline != null) {
             Log.i(TAG, "fetching from offline" );
@@ -40,7 +41,7 @@ public class ArticlesModel extends VolleyModel {
             listener.onResponseRecieved(new ResponseListener.Response(true, articleListOffline));
         }
 
-
+        //requesting online data even after fetching offline data.
         String url = SERVER_PATH + TOP_STORIES;
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, response -> {

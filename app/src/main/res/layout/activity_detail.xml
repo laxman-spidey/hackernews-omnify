@@ -103,6 +103,7 @@
                 android:background="?attr/colorPrimary"
                 android:contentInsetStart="0dp"
                 android:contentInsetLeft="0dp"
+                app:title="Article detail"
 
                 app:layout_collapseMode="pin"
                 android:minHeight="?attr/actionBarSize"
@@ -110,8 +111,18 @@
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    >
+                    <TextView
+                        android:id="@+id/toolbarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Article"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
