@@ -10,4 +10,5 @@
     app:layoutManager="LinearLayoutManager"
     android:orientation="vertical"
     tools:context=".ArticlesFragment"
+    android:scrollbars="vertical"
     tools:listitem="@layout/article_item" />
