@@ -8,5 +8,6 @@
     <color name="articleRepCountBackground">#FFC7A4</color>
     <color name="articleRepTextColor">#8E6C5F</color>
     <color name="articleBackground">#EFEFEF</color>
+    <color name="tw__transparent">#00000000</color>
 
 </resources>

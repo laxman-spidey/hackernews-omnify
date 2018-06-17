@@ -110,7 +110,12 @@ public class LoginActivity extends BaseActivity implements FirebaseAuth.AuthStat
 
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
+        if (FirebaseAuth.getInstance() != null) {
+            if(FirebaseAuth.getInstance().getCurrentUser() != null)
+            {
+                showMainActivity();
+            }
+        }
     }
 
     @Override
