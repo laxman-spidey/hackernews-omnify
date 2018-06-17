@@ -62,7 +62,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
             mItem = comment;
             mCommentText.setText(comment.text);
             mCommentUser.setText(comment.by);
-            mCommentDateTime.setText(""+comment.time);
+            mCommentDateTime.setText(DateUtil.getCommentDateFormat(comment.time));
         }
 
     }
