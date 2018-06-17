@@ -52,7 +52,7 @@ public class ArticlesFragment extends BaseFragment {
             Context context = view.getContext();
 
             recyclerView = (RecyclerView) view;
-            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             recyclerView.setAdapter(new ArticlesRecyclerViewAdapter(articles, mListener));

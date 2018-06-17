@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:padding="8dp"
                 android:layout_marginTop="?attr/actionBarSize"
+                android:layout_marginLeft="16dp"
                 android:paddingBottom="5dp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5"
@@ -36,12 +37,13 @@
                     android:id="@+id/articleTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginTop="4dp"
                     android:ellipsize="marquee"
                     android:maxLines="2"
                     android:text="Article Title"
                     android:textSize="20sp"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <TextView
@@ -49,12 +51,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/articleTitle"
-                    android:layout_marginBottom="2dp"
+                    android:layout_marginBottom="6dp"
                     android:layout_marginTop="2dp"
                     android:ellipsize="marquee"
                     android:singleLine="true"
                     android:text="www.w3schools.com"
                     android:textSize="14sp"
+                    android:textColor="@color/white"
                     android:textStyle="italic" />
 
                 <TextView
@@ -62,6 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/articleSite"
+                    android:textColor="@color/white"
                     android:text="2 hours ago   " />
 
                 <TextView
@@ -73,6 +77,7 @@
                     android:layout_toRightOf="@+id/submissionDate"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
+                    android:textColor="@color/white"
                     android:text="·"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -86,6 +91,8 @@
                     android:layout_alignTop="@+id/submissionDate"
                     android:layout_toEndOf="@+id/middleDot"
                     android:layout_toRightOf="@+id/middleDot"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="16dp"
                     android:text="user1" />
             </RelativeLayout>
 
